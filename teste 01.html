@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Validação de Formulário com Alerta</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 40px;
+      background: #f4f4f4;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    h1 {
+      color: #333;
+    }
+
+    .form-container {
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      max-width: 400px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 10px;
+      color: #333;
+      font-weight: bold;
+    }
+
+    input[type="email"] {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 20px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 16px;
+    }
+
+    button {
+      padding: 10px 20px;
+      background-color: #007bff;
+      border: none;
+      color: white;
+      font-size: 16px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .alert {
+      background-color: #dc3545;
+      color: white;
+      padding: 15px;
+      margin-top: 15px;
+      border-radius: 5px;
+      display: none;
+      opacity: 0;
+      transform: translateY(-10px);
+      transition: opacity 0.4s ease, transform 0.4s ease;
+    }
+
+    .alert.show {
+      display: block;
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Cadastro</h1>
+
+  <div class="form-container">
+    <form id="formulario">
+      <label for="email">Seu e-mail:</label>
+      <input type="email" id="email" placeholder="exemplo@email.com" />
+      <button type="submit">Enviar</button>
+    </form>
+    <div id="alertaErro" class="alert">❌ Por favor, insira um e-mail válido.</div>
+  </div>
+
+  <script>
+    const formulario = document.getElementById("formulario");
+    const alertaErro = document.getElementById("alertaErro");
+
+    formulario.addEventListener("submit", function (e) {
+      e.preventDefault(); // Evita envio real do formulário
+
+      const email = document.getElementById("email").value.trim();
+
+      // Validação simples de e-mail
+      if (email === "" || !email.includes("@") || !email.includes(".")) {
+        alertaErro.classList.add("show");
+        setTimeout(() => {
+          alertaErro.classList.remove("show");
+        }, 4000);
+      } else {
+        // Simula envio bem-sucedido
+        alert("✅ Cadastro realizado com sucesso!");
+        formulario.reset();
+      }
+    });
+  </script>
+
+</body>
+</html>
