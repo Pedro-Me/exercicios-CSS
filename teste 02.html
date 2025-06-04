@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Alertas Temporários</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      padding: 30px;
+      text-align: center;
+    }
+
+    h1 {
+      color: #333;
+    }
+
+    button {
+      padding: 10px 20px;
+      margin: 10px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .sucesso { background-color: #28a745; color: white; }
+    .erro    { background-color: #dc3545; color: white; }
+    .info    { background-color: #17a2b8; color: white; }
+    .aviso   { background-color: #ffc107; color: black; }
+
+    .alerta {
+      display: none;
+      margin: 20px auto;
+      padding: 15px 20px;
+      border-radius: 8px;
+      max-width: 400px;
+      font-size: 16px;
+      animation: fadein 0.4s ease;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+
+    .alerta.sucesso { background-color: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
+    .alerta.erro    { background-color: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; }
+    .alerta.info    { background-color: #d1ecf1; color: #0c5460; border: 1px solid #bee5eb; }
+    .alerta.aviso   { background-color: #fff3cd; color: #856404; border: 1px solid #ffeeba; }
+
+    @keyframes fadein {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Alertas Temporários</h1>
+
+  <!-- Botões -->
+  <button class="sucesso" onclick="mostrarAlerta('sucesso')">Mostrar Sucesso</button>
+  <button class="erro" onclick="mostrarAlerta('erro')">Mostrar Erro</button>
+  <button class="info" onclick="mostrarAlerta('info')">Mostrar Informação</button>
+  <button class="aviso" onclick="mostrarAlerta('aviso')">Mostrar Aviso</button>
+
+  <!-- Alertas -->
+  <div id="alert-sucesso" class="alerta sucesso">✅ Ação realizada com sucesso!</div>
+  <div id="alert-erro" class="alerta erro">❌ Ocorreu um erro ao processar a solicitação.</div>
+  <div id="alert-info" class="alerta info">ℹ️ Esta é uma mensagem de informação.</div>
+  <div id="alert-aviso" class="alerta aviso">⚠️ Este é um aviso temporário.</div>
+
+  <script>
+    function mostrarAlerta(tipo) {
+      const alerta = document.getElementById("alert-" + tipo);
+
+      // Oculta todos os alertas antes de mostrar um novo
+      document.querySelectorAll('.alerta').forEach(a => a.style.display = 'none');
+
+      alerta.style.display = "block";
+
+      setTimeout(() => {
+        alerta.style.display = "none";
+      }, 3000); // 3 segundos
+    }
+  </script>
+
+</body>
+</html>
