@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cafeteria Aroma do Café</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #fdf6f0;
+      color: #4b3e2d;
+    }
+    header {
+      background-color: #6b4f3b;
+      color: white;
+      padding: 30px;
+      text-align: center;
+    }
+    nav {
+      background-color: #d8b59b;
+      padding: 15px;
+      text-align: center;
+    }
+    nav a {
+      margin: 0 20px;
+      text-decoration: none;
+      color: #4b3e2d;
+      font-weight: bold;
+      transition: color 0.3s;
+    }
+    nav a:hover {
+      color: #fff;
+    }
+    main {
+      padding: 30px;
+    }
+    section {
+      margin-bottom: 50px;
+    }
+    footer {
+      background-color: #6b4f3b;
+      color: white;
+      text-align: center;
+      padding: 20px;
+    }
+    img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 10px;
+      margin-bottom: 15px;
+    }
+    iframe {
+      width: 100%;
+      max-width: 600px;
+      height: 350px;
+      border: none;
+      border-radius: 10px;
+    }
+    .button {
+      display: inline-block;
+      padding: 10px 20px;
+      margin-top: 10px;
+      background-color: #6b4f3b;
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+      transition: background-color 0.3s;
+    }
+    .button:hover {
+      background-color: #4b3e2d;
+    }
+    .gallery {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+      justify-content: center;
+    }
+    .gallery img {
+      width: 300px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Cafeteria Aroma do Café</h1>
+    <p>O melhor café da cidade com um toque especial de carinho.</p>
+    <a href="#contato" class="button">Fale Conosco</a>
+  </header>
+
+  <nav>
+    <a href="#sobre">Sobre</a>
+    <a href="#galeria">Galeria</a>
+    <a href="#menu">Cardápio</a>
+    <a href="#video">Vídeo</a>
+    <a href="#contato">Contato</a>
+  </nav>
+
+  <main>
+    <section id="sobre">
+      <h2>Sobre Nós</h2>
+      <p>Desde 2010, a Cafeteria Aroma do Café oferece grãos selecionados, ambiente acolhedor e um cardápio variado para encantar todos os amantes de café. Nossa missão é proporcionar uma experiência única a cada xícara.</p>
+    </section>
+
+    <section id="galeria">
+      <h2>Galeria</h2>
+      <div class="gallery">
+        <img src="https://source.unsplash.com/300x200/?coffee" alt="Xícara de café">
+        <img src="https://source.unsplash.com/300x200/?cafe" alt="Café expresso">
+        <img src="https://source.unsplash.com/300x200/?barista" alt="Barista preparando café">
+        <img src="https://source.unsplash.com/300x200/?coffee-shop" alt="Interior da cafeteria">
+        <img src="https://source.unsplash.com/300x200/?pastry" alt="Doces e bolos">
+      </div>
+    </section>
+
+    <section id="menu">
+      <h2>Nosso Cardápio</h2>
+      <ul>
+        <li>Café expresso - R$ 5,00</li>
+        <li>Capuccino - R$ 8,00</li>
+        <li>Latte - R$ 7,50</li>
+        <li>Bolo de chocolate - R$ 6,00</li>
+        <li>Pão de queijo - R$ 3,00</li>
+      </ul>
+      <a href="pedido.html" class="button">Peça agora</a>
+    </section>
+
+    <section id="video">
+      <h2>Conheça Nosso Espaço</h2>
+      <iframe src="https://www.youtube.com/embed/YQwS12LEFAg" title="Tour pela cafeteria"></iframe>
+    </section>
+
+    <section id="contato">
+      <h2>Contato</h2>
+      <p>Visite-nos: Rua dos Sabores, 123 - Centro, São Paulo</p>
+      <p>Telefone: <a href="tel:+5511987654321">(11) 98765-4321</a></p>
+      <p>Email: <a href="mailto:contato@aromadocafe.com">contato@aromadocafe.com</a></p>
+      <p>Nos siga no <a href="https://www.instagram.com/aromadocafe" target="_blank">Instagram</a> e no <a href="https://www.facebook.com/aromadocafe" target="_blank">Facebook</a></p>
+      <a href="mailto:contato@aromadocafe.com" class="button">Enviar E-mail</a>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Cafeteria Aroma do Café - Todos os direitos reservados.</p>
+  </footer>
+</body>
+</html>

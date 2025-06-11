@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pedido - Cafeteria Aroma do Café</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #fff9f4;
+      color: #4b3e2d;
+      padding: 30px;
+    }
+    h1 {
+      text-align: center;
+      color: #6b4f3b;
+    }
+    .produto-lista {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      margin-top: 30px;
+    }
+    .produto-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      padding: 10px 20px;
+      background-color: #fff;
+    }
+    .produto-info {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+    .produto-info img {
+      width: 60px;
+      height: 60px;
+      border-radius: 8px;
+      object-fit: cover;
+    }
+    .produto-controles {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .produto-controles button {
+      background-color: #6b4f3b;
+      color: white;
+      border: none;
+      width: 32px;
+      height: 32px;
+      font-size: 20px;
+      border-radius: 50%;
+      cursor: pointer;
+    }
+    .quantidade {
+      font-size: 18px;
+      min-width: 24px;
+      text-align: center;
+    }
+    #subtotal {
+      font-size: 1.2em;
+      margin-top: 30px;
+      text-align: right;
+      font-weight: bold;
+    }
+    .finalizar {
+      display: block;
+      margin: 30px auto;
+      padding: 10px 30px;
+      background-color: #4b3e2d;
+      color: white;
+      font-size: 1em;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .pedido-concluido {
+      display: none;
+      text-align: center;
+      margin-top: 40px;
+    }
+    .pedido-concluido img {
+      width: 200px;
+      margin-bottom: 20px;
+    }
+    .pedido-concluido button {
+      margin: 10px;
+      padding: 10px 20px;
+      background-color: #6b4f3b;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <h1>Monte seu Pedido</h1>
+
+  <div class="produto-lista" id="produtos"></div>
+  <div id="subtotal">Subtotal: R$ 0,00</div>
+  <button class="finalizar" onclick="finalizarPedido()">Finalizar Pedido</button>
+
+  <div class="pedido-concluido" id="pedidoConcluido">
+    <img src="https://i.imgur.com/2nCt3Sbl.png" alt="Pedido Concluído">
+    <h2>Pedido Concluído!</h2>
+    <button onclick="location.href='teste 04.html'">Voltar à Página Inicial</button>
+    <button onclick="continuarPedido()">Continuar Pedindo</button>
+  </div>
+
+  <script>
+    const catalogo = [
+      { nome: 'Café Expresso', preco: 5.00, imagem: 'https://i.imgur.com/9k8zQ4M.jpg' },
+      { nome: 'Capuccino', preco: 8.00, imagem: 'cappuccino-8519098_1280.png' },
+      { nome: 'Latte', preco: 7.50, imagem: 'https://i.imgur.com/bFQaXrR.jpg' },
+      { nome: 'Bolo de Chocolate', preco: 6.00, imagem: 'https://i.imgur.com/FIb9A8G.jpg' },
+      { nome: 'Pão de Queijo', preco: 3.00, imagem: 'https://i.imgur.com/DFMZp7N.jpg' }
+    ];
+
+    const carrinho = {};
+
+    function renderProdutos() {
+      const container = document.getElementById('produtos');
+      container.innerHTML = '';
+
+      catalogo.forEach((produto) => {
+        const quantidade = carrinho[produto.nome] || 0;
+
+        const div = document.createElement('div');
+        div.className = 'produto-item';
+
+        div.innerHTML = `
+          <div class="produto-info">
+            <img src="${produto.imagem}" alt="${produto.nome}">
+            <div>
+              <strong>${produto.nome}</strong><br>
+              R$ ${produto.preco.toFixed(2)}
+            </div>
+          </div>
+          <div class="produto-controles">
+            <button onclick="alterarQuantidade('${produto.nome}', -1)">-</button>
+            <span class="quantidade">${quantidade}</span>
+            <button onclick="alterarQuantidade('${produto.nome}', 1)">+</button>
+          </div>
+        `;
+
+        container.appendChild(div);
+      });
+
+      atualizarSubtotal();
+    }
+
+    function alterarQuantidade(nome, delta) {
+      if (!carrinho[nome]) carrinho[nome] = 0;
+      carrinho[nome] += delta;
+      if (carrinho[nome] < 0) carrinho[nome] = 0;
+      renderProdutos();
+    }
+
+    function atualizarSubtotal() {
+      let subtotal = 0;
+      for (const nome in carrinho) {
+        const produto = catalogo.find(p => p.nome === nome);
+        subtotal += carrinho[nome] * produto.preco;
+      }
+      document.getElementById('subtotal').textContent = `Subtotal: R$ ${subtotal.toFixed(2)}`;
+    }
+
+    function finalizarPedido() {
+      const produtosSelecionados = Object.entries(carrinho).filter(([_, qtd]) => qtd > 0);
+      if (produtosSelecionados.length === 0) {
+        alert('Adicione produtos ao pedido antes de finalizar.');
+        return;
+      }
+
+      document.querySelector('.produto-lista').style.display = 'none';
+      document.getElementById('subtotal').style.display = 'none';
+      document.querySelector('.finalizar').style.display = 'none';
+      document.getElementById('pedidoConcluido').style.display = 'block';
+    }
+
+    function continuarPedido() {
+      Object.keys(carrinho).forEach(chave => carrinho[chave] = 0);
+      document.getElementById('pedidoConcluido').style.display = 'none';
+      document.querySelector('.produto-lista').style.display = 'flex';
+      document.getElementById('subtotal').style.display = 'block';
+      document.querySelector('.finalizar').style.display = 'block';
+      renderProdutos();
+    }
+
+    renderProdutos();
+  </script>
+</body>
+</html>
